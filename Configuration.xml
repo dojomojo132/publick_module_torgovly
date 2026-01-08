@@ -293,6 +293,7 @@
 			<DataProcessor>ТестовоеЗаполнениеОбъектов</DataProcessor>
 			<DataProcessor>ЗагрузкаТовараИзЕксель</DataProcessor>
 			<DataProcessor>ТестовоеЗаполнениеНоменклатуры</DataProcessor>
+			<DataProcessor>СозданиеТестовыхДокументов</DataProcessor>
 			<InformationRegister>Цены</InformationRegister>
 			<InformationRegister>ФискальныеПродажы</InformationRegister>
 			<AccumulationRegister>ОстаткиТоваров</AccumulationRegister>

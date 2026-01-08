@@ -4,7 +4,42 @@
 	<UsePostingMode>Auto</UsePostingMode>
 	<RepostOnWrite>true</RepostOnWrite>
 	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
 		<ChildItems>
+			<Button name="ФормаЗаписать" id="51">
+				<Type>CommandBarButton</Type>
+				<DefaultButton>true</DefaultButton>
+				<CommandName>Form.StandardCommand.Write</CommandName>
+				<Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Записати</v8:content>
+					</v8:item>
+				</Title>
+				<ExtendedTooltip name="ФормаЗаписатьРасширеннаяПодсказка" id="52"/>
+			</Button>
+			<Button name="ФормаЗакрыть" id="53">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.StandardCommand.Close</CommandName>
+				<Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Закрити</v8:content>
+					</v8:item>
+				</Title>
+				<ExtendedTooltip name="ФормаЗакрытьРасширеннаяПодсказка" id="54"/>
+			</Button>
+			<Button name="ФормаПроверитьЗаполнение" id="45">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.Command.ПроверитьЗаполнение</CommandName>
+				<Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Перевірити заповнення</v8:content>
+					</v8:item>
+				</Title>
+				<ExtendedTooltip name="ФормаПроверитьЗаполнениеРасширеннаяПодсказка" id="46"/>
+			</Button>
 			<Button name="ФормаОбработатьЦенны" id="43">
 				<Type>CommandBarButton</Type>
 				<CommandName>Form.Command.ОбработатьДанныеЦен</CommandName>
@@ -13,7 +48,7 @@
 				<Title>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Обработать Цены</v8:content>
+						<v8:content>Опрацювати ціни</v8:content>
 					</v8:item>
 				</Title>
 				<ExtendedTooltip name="ФормаОбработатьЦенныРасширеннаяПодсказка" id="44"/>
@@ -23,12 +58,19 @@
 				<CommandName>Form.Command.ОбработатьОстатки</CommandName>
 				<BackColor>web:AliceBlue</BackColor>
 				<BorderColor>#000000</BorderColor>
+				<Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Оправцювати залишки</v8:content>
+					</v8:item>
+				</Title>
 				<ExtendedTooltip name="ФормаОбработатьОстаткиРасширеннаяПодсказка" id="48"/>
 			</Button>
-			<Button name="ФормаПроверитьЗаполнение" id="45">
+			<Button name="ФормаДобавитьНоменклатуру" id="49">
 				<Type>CommandBarButton</Type>
-				<CommandName>Form.Command.ПроверитьЗаполнение</CommandName>
-				<ExtendedTooltip name="ФормаПроверитьЗаполнениеРасширеннаяПодсказка" id="46"/>
+				<CommandName>Form.Command.ДобавитьНоменклатуру</CommandName>
+				<BackColor>web:AliceBlue</BackColor>
+				<ExtendedTooltip name="ФормаДобавитьНоменклатуруРасширеннаяПодсказка" id="50"/>
 			</Button>
 		</ChildItems>
 	</AutoCommandBar>
@@ -107,6 +149,9 @@
 				<ContextMenu name="ДанныеНоменклатурыУправлениеПоискомКонтекстноеМеню" id="21"/>
 				<ExtendedTooltip name="ДанныеНоменклатурыУправлениеПоискомРасширеннаяПодсказка" id="22"/>
 			</SearchControlAddition>
+			<Events>
+				<Event name="OnChange">ДанныеНоменклатурыПриИзменении</Event>
+			</Events>
 			<ChildItems>
 				<LabelField name="ДанныеНоменклатурыНомерСтроки" id="23">
 					<DataPath>Объект.ДанныеНоменклатуры.LineNumber</DataPath>
@@ -116,6 +161,12 @@
 				</LabelField>
 				<InputField name="ДанныеНоменклатурыШтрихКод" id="26">
 					<DataPath>Объект.ДанныеНоменклатуры.ШтрихКод</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Штрихкод</v8:content>
+						</v8:item>
+					</Title>
 					<EditMode>EnterOnInput</EditMode>
 					<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 					<Format>
@@ -138,6 +189,13 @@
 				</InputField>
 				<InputField name="ДанныеНоменклатурыНоменклатура" id="29">
 					<DataPath>Объект.ДанныеНоменклатуры.Номенклатура</DataPath>
+					<SkipOnInput>true</SkipOnInput>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Назва товару</v8:content>
+						</v8:item>
+					</Title>
 					<EditMode>EnterOnInput</EditMode>
 					<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 					<ContextMenu name="ДанныеНоменклатурыНоменклатураКонтекстноеМеню" id="30"/>
@@ -145,6 +203,12 @@
 				</InputField>
 				<InputField name="ДанныеНоменклатурыЦена" id="32">
 					<DataPath>Объект.ДанныеНоменклатуры.Цена</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ціна</v8:content>
+						</v8:item>
+					</Title>
 					<EditMode>EnterOnInput</EditMode>
 					<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 					<ContextMenu name="ДанныеНоменклатурыЦенаКонтекстноеМеню" id="33"/>
@@ -155,6 +219,12 @@
 				</InputField>
 				<InputField name="ДанныеНоменклатурыОстаток" id="35">
 					<DataPath>Объект.ДанныеНоменклатуры.Остаток</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Залишок</v8:content>
+						</v8:item>
+					</Title>
 					<EditMode>EnterOnInput</EditMode>
 					<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 					<ContextMenu name="ДанныеНоменклатурыОстатокКонтекстноеМеню" id="36"/>
@@ -166,7 +236,13 @@
 				<InputField name="ДанныеНоменклатурыСумма" id="38">
 					<DataPath>Объект.ДанныеНоменклатуры.Сумма</DataPath>
 					<Enabled>false</Enabled>
-					<TitleBackColor>style:ActivityColor</TitleBackColor>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сума</v8:content>
+						</v8:item>
+					</Title>
+					<TitleBackColor>#D9D9D9</TitleBackColor>
 					<EditMode>EnterOnInput</EditMode>
 					<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 					<BackColor>style:ToolTipBackColor</BackColor>
@@ -233,6 +309,21 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ОбработатьОстатки</Action>
+		</Command>
+		<Command name="ДобавитьНоменклатуру" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Додати номенклатуру</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Добавить номенклатуру</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ДобавитьНоменклатуру</Action>
 		</Command>
 	</Commands>
 </Form>
